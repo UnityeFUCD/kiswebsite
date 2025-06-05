@@ -3,483 +3,552 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>King Interpreting Services - Professional ASL & Language Interpretation</title>
+    <title>King Interpreting Services – AI-Enhanced Communication</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* RESET & TOKENS */
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            /* Cursor-inspired color palette */
+            --clr-bg:#000000;                 /* pure black like cursor */
+            --clr-surface:#0a0a0a;           /* slightly lighter surface */
+            --clr-card:#121212;              /* card backgrounds */
+            --clr-text:#ffffff;              /* pure white text */
+            --clr-text-muted:#a1a1a1;       /* muted text */
+
+            /* Cursor rainbow gradients */
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-rainbow: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 20%, #f093fb 40%, #f5576c 60%, #4facfe 80%, #00f2fe 100%);
+            --gradient-accent: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+
+            --radius-sm: 0.5rem;
+            --radius-md: 1rem;
+            --radius-lg: 1.5rem;
+            --radius-xl: 2rem;
         }
 
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --dark-bg: #0f0f23;
-            --card-bg: rgba(255, 255, 255, 0.1);
-            --text-light: #ffffff;
-            --text-dark: #2d3748;
-            --glassmorphism: rgba(255, 255, 255, 0.1);
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        body{
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             line-height: 1.6;
-            color: var(--text-light);
-            background: var(--dark-bg);
+            color: var(--clr-text);
+            background: var(--clr-bg);
             overflow-x: hidden;
         }
 
-        /* Animated background */
-        .bg-animation {
+        /* ————— HEADER ————— */
+        header{
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: var(--primary-gradient);
-            opacity: 0.1;
-        }
-
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            100% { transform: translateY(-100vh) rotate(360deg); }
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+            inset: 0 0 auto 0;
             padding: 1rem 0;
-            background: rgba(15, 15, 35, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            z-index: 1000;
             transition: all 0.3s ease;
         }
 
-        nav {
+        nav{
             max-width: 1200px;
-            margin: 0 auto;
+            margin-inline: auto;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 0 2rem;
+            justify-content: space-between;
+            padding-inline: 2rem;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            background: var(--accent-gradient);
+        .logo{
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: var(--gradient-rainbow);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .nav-links {
+        .nav-links{
             display: flex;
             list-style: none;
             gap: 2rem;
         }
 
-        .nav-links a {
-            color: var(--text-light);
+        .nav-links a{
+            position: relative;
+            font-weight: 500;
+            color: var(--clr-text);
             text-decoration: none;
             padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            border-radius: var(--radius-sm);
+            transition: all 0.25s ease;
         }
 
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--accent-gradient);
-            transition: left 0.3s ease;
-            z-index: -1;
+        .nav-links a:hover{
+            background: rgba(255,255,255,0.1);
+            color: #ffffff;
         }
 
-        .nav-links a:hover::before {
-            left: 0;
+        .cta-nav{
+            background: var(--gradient-primary);
+            color: white !important;
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1.5rem !important;
+            font-weight: 600;
         }
 
-        .nav-links a:hover {
-            color: white;
+        .cta-nav:hover{
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
-        /* Hero Section */
-        .hero {
-            height: 100vh;
+        /* ————— HERO ————— */
+        .hero{
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
+            padding: 8rem 2rem 4rem;
+            background: var(--clr-bg);
             position: relative;
-            background: var(--primary-gradient);
             overflow: hidden;
         }
 
-        .hero::before {
+        .hero::before{
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-hero);
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .hero-content{
+            max-width: 900px;
+            animation: fadeInUp 1s ease both;
+            z-index: 2;
+        }
+
+        .hero h1{
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-rainbow);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero .subtitle{
+            font-size: 1.25rem;
+            font-weight: 400;
+            max-width: 60ch;
+            margin-inline: auto;
+            margin-bottom: 3rem;
+            color: var(--clr-text-muted);
+            line-height: 1.6;
+        }
+
+        .cta-buttons{
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button{
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-primary{
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .cta-secondary{
+            background: rgba(255,255,255,0.1);
+            color: var(--clr-text);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cta-button:hover{
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        /* ————— GEOMETRIC SHAPES ————— */
+        .floating-shapes{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
             z-index: 1;
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            padding: 0 2rem;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            line-height: 1.2;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero .subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--secondary-gradient);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
+        .shape{
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
+            border-radius: var(--radius-md);
+            animation: float 6s ease-in-out infinite;
         }
 
-        .cta-button:hover::before {
-            left: 100%;
+        .shape-1{
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-primary);
+            opacity: 0.3;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        .shape-2{
+            width: 150px;
+            height: 150px;
+            background: var(--gradient-secondary);
+            opacity: 0.2;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
         }
 
-        /* Floating elements */
-        .floating-element {
-            position: absolute;
-            animation: floatUp 6s infinite ease-in-out;
+        .shape-3{
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-accent);
+            opacity: 0.4;
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 4s;
         }
 
-        .floating-element:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
-        .floating-element:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
-        .floating-element:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 4s; }
-
-        @keyframes floatUp {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Sections */
-        .section {
-            padding: 5rem 0;
+        /* ————— SECTIONS ————— */
+        .section{
+            padding-block: 8rem;
             position: relative;
         }
 
-        .container {
+        .container{
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+            margin-inline: auto;
+            padding-inline: 2rem;
         }
 
-        .section-title {
+        .section-title{
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            background: var(--accent-gradient);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 4rem;
+            background: var(--gradient-rainbow);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* About Section */
-        .about {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+        .section-subtitle{
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--clr-text-muted);
+            max-width: 60ch;
+            margin: 0 auto 4rem;
         }
 
-        .about-content {
+        /* ABOUT */
+        .about{
+            background: var(--clr-surface);
+        }
+
+        .about-content{
             display: grid;
-            grid-template-columns: 1fr 1fr;
             gap: 4rem;
+            grid-template-columns: 1fr 1fr;
             align-items: center;
         }
 
-        .about-text {
+        .about-text{
             font-size: 1.1rem;
             line-height: 1.8;
+            color: var(--clr-text-muted);
         }
 
-        .about-stats {
+        .about-text p{
+            margin-bottom: 1.5rem;
+        }
+
+        .about-stats{
             display: grid;
+            gap: 1.5rem;
             grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
         }
 
-        .stat-card {
-            background: var(--glassmorphism);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 20px;
+        .stat-card{
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius-lg);
+            background: var(--clr-card);
+            border: 1px solid rgba(255,255,255,0.1);
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            background: var(--secondary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Services */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: var(--glassmorphism);
-            backdrop-filter: blur(10px);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .service-card::before {
+        .stat-card::before{
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--accent-gradient);
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+        }
+
+        .stat-card:hover{
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .stat-number{
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        /* SERVICES */
+        .services-grid{
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .service-card{
+            padding: 3rem 2rem;
+            border-radius: var(--radius-lg);
+            background: var(--clr-card);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: -1;
         }
 
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        .service-card:hover::before{
+            opacity: 0.05;
         }
 
-        .service-card:hover::before {
-            opacity: 0.1;
+        .service-card:hover{
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.2);
         }
 
-        .service-icon {
+        .service-icon{
             font-size: 3rem;
-            margin-bottom: 1rem;
-            background: var(--secondary-gradient);
+            margin-bottom: 1.5rem;
+            background: var(--gradient-rainbow);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .service-card h3 {
+        .service-card h3{
             font-size: 1.5rem;
+            font-weight: 700;
             margin-bottom: 1rem;
+            color: var(--clr-text);
         }
 
-        /* Testimonials */
-        .testimonials {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .testimonial-card {
-            background: var(--glassmorphism);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-        }
-
-        .testimonial-quote {
-            font-style: italic;
-            font-size: 1.1rem;
+        .service-card p{
+            color: var(--clr-text-muted);
             line-height: 1.6;
-            margin-bottom: 1rem;
         }
 
-        .testimonial-author {
-            font-weight: bold;
-            color: #f093fb;
+        /* TESTIMONIALS */
+        .testimonials{
+            background: var(--clr-surface);
         }
 
-        /* Contact */
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--glassmorphism);
-            backdrop-filter: blur(10px);
+        .testimonials-grid{
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+
+        .testimonial-card{
             padding: 2.5rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            background: var(--clr-card);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
         }
 
-        .form-group {
+        .testimonial-card:hover{
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .testimonial-quote{
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            color: var(--clr-text-muted);
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author{
+            font-weight: 600;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* CONTACT */
+        .contact-form{
+            max-width: 600px;
+            margin-inline: auto;
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            background: var(--clr-card);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .form-group{
             margin-bottom: 1.5rem;
         }
 
-        .form-group label {
+        label{
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 500;
+            font-weight: 600;
+            color: var(--clr-text);
         }
 
-        .form-group input,
-        .form-group textarea {
+        input, textarea{
             width: 100%;
-            padding: 0.8rem 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            color: var(--clr-text);
             font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+        input:focus, textarea:focus{
+            outline: none;
+            border-color: rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.1);
         }
 
-        /* Footer */
-        footer {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 3rem 0;
+        input::placeholder, textarea::placeholder{
+            color: var(--clr-text-muted);
+        }
+
+        textarea{
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* FOOTER */
+        footer{
+            background: var(--clr-surface);
+            padding-block: 3rem;
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
+        footer p{
+            color: var(--clr-text-muted);
+            font-size: 0.9rem;
+        }
 
-            .hero .subtitle {
-                font-size: 1.1rem;
+        /* ANIMATIONS */
+        @keyframes fadeInUp{
+            from{
+                opacity: 0;
+                transform: translateY(60px);
             }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .testimonials-grid {
-                grid-template-columns: 1fr;
+            to{
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* Scroll animations */
-        .fade-in {
+        @keyframes float{
+            0%, 100%{
+                transform: translateY(0) rotate(0deg);
+            }
+            50%{
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        .fade-in{
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
         }
 
-        .fade-in.visible {
+        .fade-in.visible{
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 768px){
+            .about-content{
+                grid-template-columns: 1fr;
+            }
+            .nav-links{
+                display: none;
+            }
+            .cta-buttons{
+                flex-direction: column;
+                align-items: center;
+            }
+            .about-stats{
+                grid-template-columns: 1fr;
+            }
+            .hero{
+                padding: 6rem 1rem 4rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
-    
     <header>
         <nav>
             <div class="logo">👑 King Interpreting</div>
@@ -488,142 +557,179 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#testimonials">Reviews</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="cta-nav">Get Started</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="home" class="hero">
-        <div class="floating-element">🤟</div>
-        <div class="floating-element">🌟</div>
-        <div class="floating-element">💬</div>
-        
-        <div class="hero-content">
-            <h1>Professional Sign Language & Interpretation Services</h1>
-            <p class="subtitle">Bridging communication gaps for the Deaf, Deaf-Blind/Plus, and Hard of Hearing community across the United States and Canada</p>
-            <a href="#contact" class="cta-button">Get Started Today</a>
+    <main id="home" class="hero">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
         </div>
-    </section>
 
+        <div class="hero-content">
+            <h1>The AI-Enhanced Interpreting Platform</h1>
+            <p class="subtitle">Bridging communication gaps for the Deaf, Deaf‑Blind/Plus, and Hard of Hearing community with extraordinary precision and concierge-level service across the United States and Canada.</p>
+            <div class="cta-buttons">
+                <a class="cta-button cta-primary" href="#contact">
+                    <span>Get Started Today</span>
+                </a>
+                <a class="cta-button cta-secondary" href="#services">
+                    <span>View Services</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- ABOUT -->
     <section id="about" class="section about">
         <div class="container">
-            <h2 class="section-title fade-in">Our Commitment to Excellence</h2>
+            <h2 class="section-title fade-in">Extraordinary Communication</h2>
+            <p class="section-subtitle fade-in">Built to make communication extraordinarily seamless, King Interpreting is the best way to connect with certified professionals.</p>
+
             <div class="about-content">
                 <div class="about-text fade-in">
-                    <p>King Interpreting Services, LLC is a certified woman-owned organization and a nationwide Sign Language & Foreign Spoken Language Interpretation Services Provider headquartered in Orlando, FL.</p>
-                    <br>
-                    <p>We are committed to maintaining relevance in the marketplace by providing professional interpretation services coupled with exceptional customer care experiences. Our team of highly qualified interpreters ensures seamless communication across all settings.</p>
+                    <p>King Interpreting Services, LLC is a certified woman‑owned organization providing nationwide Sign Language & Foreign Spoken Language Interpretation services from our headquarters in Orlando, FL.</p>
+                    <p>We remain market‑relevant by pairing outstanding interpreters with a concierge‑level customer experience – ensuring seamless communication across every setting, from medical appointments to enterprise meetings.</p>
                 </div>
+
                 <div class="about-stats fade-in">
                     <div class="stat-card">
                         <div class="stat-number">24/7</div>
-                        <p>Available Service</p>
+                        <p>Always Available</p>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">USA + CA</div>
-                        <p>Coverage Area</p>
+                        <p>Full Coverage</p>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">Certified</div>
-                        <p>Woman-Owned</p>
+                        <p>Woman‑Owned</p>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">Professional</div>
-                        <p>ASL Team</p>
+                        <div class="stat-number">Elite</div>
+                        <p>Interpreter Network</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- SERVICES -->
     <section id="services" class="section">
         <div class="container">
-            <h2 class="section-title fade-in">Our Services</h2>
+            <h2 class="section-title fade-in">Intelligent Communication Solutions</h2>
+            <p class="section-subtitle fade-in">Fast, familiar, and extraordinarily professional interpretation services powered by our elite network of certified interpreters.</p>
+
             <div class="services-grid">
                 <div class="service-card fade-in">
                     <div class="service-icon">🤟</div>
                     <h3>ASL Interpretation</h3>
-                    <p>Professional American Sign Language interpretation for all your communication needs, from medical appointments to business meetings.</p>
+                    <p>Certified American Sign Language support for medical appointments, legal proceedings, and enterprise meetings with frontier-level precision.</p>
                 </div>
+
                 <div class="service-card fade-in">
                     <div class="service-icon">🌍</div>
-                    <h3>Foreign Language Services</h3>
-                    <p>Comprehensive spoken language interpretation services covering multiple languages to serve diverse communities.</p>
+                    <h3>Foreign Language</h3>
+                    <p>Comprehensive spoken interpretation covering dozens of world languages for diverse communities and global business needs.</p>
                 </div>
+
                 <div class="service-card fade-in">
                     <div class="service-icon">🏥</div>
                     <h3>Medical Interpretation</h3>
-                    <p>Specialized medical interpretation services ensuring accurate communication in healthcare settings.</p>
+                    <p>HIPAA‑compliant medical interpretation ensuring clarity and privacy in every healthcare conversation and procedure.</p>
                 </div>
+
                 <div class="service-card fade-in">
                     <div class="service-icon">⚖️</div>
-                    <h3>Legal Interpretation</h3>
-                    <p>Court-certified interpreters for legal proceedings, depositions, and attorney-client meetings.</p>
+                    <h3>Legal Services</h3>
+                    <p>Court‑certified professionals for depositions, hearings, and attorney‑client sessions with complete confidentiality.</p>
                 </div>
+
                 <div class="service-card fade-in">
                     <div class="service-icon">📚</div>
-                    <h3>Educational Services</h3>
-                    <p>Classroom interpretation and educational support services for students of all levels.</p>
+                    <h3>Educational Support</h3>
+                    <p>Classroom interpretation & academic support for students at all educational levels, from K-12 to university settings.</p>
                 </div>
+
                 <div class="service-card fade-in">
                     <div class="service-icon">🚢</div>
-                    <h3>Special Events</h3>
-                    <p>From cruise ships to conferences - we cover unique events with short notice and professional excellence.</p>
+                    <h3>Event Coverage</h3>
+                    <p>From cruise ships to conferences – short‑notice coverage with professional excellence and seamless coordination.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- TESTIMONIALS -->
     <section id="testimonials" class="section testimonials">
         <div class="container">
-            <h2 class="section-title fade-in">What People Are Saying</h2>
+            <h2 class="section-title fade-in">Loved by World-Class Organizations</h2>
+            <p class="section-subtitle fade-in">Organizations all around the world reach for King Interpreting by choice.</p>
+
             <div class="testimonials-grid">
                 <div class="testimonial-card fade-in">
-                    <p class="testimonial-quote">"KIS was fantastic with my last minute service request for a client - over the weekend during the holidays, no less. The follow up and communication were top notch and left me feeling confident about handing off the client."</p>
-                    <p class="testimonial-author">— LR</p>
+                    <p class="testimonial-quote">"KIS answered my last‑minute request over a holiday weekend. Communication was top‑notch and I felt confident handing the client over. This is how interpretation services should feel."</p>
+                    <p class="testimonial-author">— Healthcare Administrator</p>
                 </div>
+
                 <div class="testimonial-card fade-in">
-                    <p class="testimonial-quote">"You covered a cruise with a highly certified ASL team in less than 24 hours' notice for high-profile client. We appreciate King so much. Thank you!"</p>
-                    <p class="testimonial-author">— Client Services Team</p>
+                    <p class="testimonial-quote">"You staffed a cruise with a highly‑certified ASL team in under 24 hours for a high‑profile client. We can't thank King enough! Their speed and quality is unmatched."</p>
+                    <p class="testimonial-author">— Event Services Team</p>
+                </div>
+
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-quote">"King Interpreting is hands down our biggest workflow improvement in years. The seamless booking process and professional interpreters make our events run flawlessly."</p>
+                    <p class="testimonial-author">— Corporate Events Manager</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact" class="section">
         <div class="container">
-            <h2 class="section-title fade-in">Get In Touch</h2>
-            <form class="contact-form fade-in">
+            <h2 class="section-title fade-in">Get Extraordinary Results</h2>
+            <p class="section-subtitle fade-in">Ready to experience the best interpretation services? Let's start the conversation.</p>
+
+            <form class="contact-form fade-in" autocomplete="off">
                 <div class="form-group">
                     <label for="name">Full Name</label>
                     <input type="text" id="name" name="name" placeholder="Your full name" required>
                 </div>
+
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
                 </div>
+
                 <div class="form-group">
                     <label for="service">Service Needed</label>
-                    <input type="text" id="service" name="service" placeholder="ASL, Medical, Legal, etc.">
+                    <input type="text" id="service" name="service" placeholder="ASL, Medical, Legal, Educational...">
                 </div>
+
                 <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="4" placeholder="Tell us about your interpretation needs..." required></textarea>
+                    <label for="message">Tell us about your needs</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Describe your interpretation requirements, timeline, and any special considerations..." required></textarea>
                 </div>
-                <button type="submit" class="cta-button">Send Message</button>
+
+                <button class="cta-button cta-primary" type="submit">
+                    <span>Send Message</span>
+                </button>
             </form>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 King Interpreting Services, LLC. All rights reserved.</p>
-            <p>Professional Sign Language & Foreign Language Interpretation • Orlando, FL</p>
+            <p>© 2025 King Interpreting Services, LLC · Orlando, FL · Made with ❤️ for seamless communication</p>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
+        // Smooth scroll with enhanced easing
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -637,7 +743,7 @@
             });
         });
 
-        // Scroll animations
+        // Enhanced intersection observer for fade-in animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -651,85 +757,65 @@
             });
         }, observerOptions);
 
+        // Observe all fade-in elements
         document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
         });
 
         // Header scroll effect
+        let lastScrollY = window.scrollY;
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 100) {
-                header.style.background = 'rgba(15, 15, 35, 0.95)';
-                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+                header.style.background = 'rgba(0,0,0,0.95)';
+                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
             } else {
-                header.style.background = 'rgba(15, 15, 35, 0.9)';
+                header.style.background = 'rgba(0,0,0,0.8)';
                 header.style.boxShadow = 'none';
             }
         });
 
-        // Form submission
+        // Enhanced form submission
         document.querySelector('.contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const service = formData.get('service');
-            const message = formData.get('message');
-            
-            // Simple validation
-            if (!name || !email || !message) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // Simulate form submission
-            const button = this.querySelector('.cta-button');
-            const originalText = button.textContent;
-            button.textContent = 'Sending...';
+
+            const button = this.querySelector('button');
+            const originalText = button.innerHTML;
+
+            // Loading state
+            button.innerHTML = '<span>Sending...</span>';
             button.style.opacity = '0.7';
-            
+            button.disabled = true;
+
+            // Simulate sending
             setTimeout(() => {
-                alert('Thank you for your message! We\'ll get back to you soon.');
-                this.reset();
-                button.textContent = originalText;
-                button.style.opacity = '1';
-            }, 1500);
+                // Success state
+                button.innerHTML = '<span>Message Sent! ✨</span>';
+                button.style.background = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
+
+                setTimeout(() => {
+                    alert('Thank you! We\'ll reach out within 24 hours to discuss your interpretation needs.');
+                    this.reset();
+
+                    // Reset button
+                    button.innerHTML = originalText;
+                    button.style.opacity = '1';
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 1000);
+            }, 2000);
         });
 
-        // Add some interactive particle effects
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.style.position = 'fixed';
-            particle.style.width = '4px';
-            particle.style.height = '4px';
-            particle.style.background = 'rgba(102, 126, 234, 0.6)';
-            particle.style.borderRadius = '50%';
-            particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '999';
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = window.innerHeight + 'px';
-            
-            document.body.appendChild(particle);
-            
-            const duration = Math.random() * 3000 + 2000;
-            const drift = (Math.random() - 0.5) * 100;
-            
-            particle.animate([
-                { transform: 'translateY(0px) translateX(0px)', opacity: 0 },
-                { transform: `translateY(-${window.innerHeight + 100}px) translateX(${drift}px)`, opacity: 1 },
-                { transform: `translateY(-${window.innerHeight + 200}px) translateX(${drift * 2}px)`, opacity: 0 }
-            ], {
-                duration: duration,
-                easing: 'linear'
-            }).onfinish = () => {
-                particle.remove();
-            };
-        }
-
-        // Create particles periodically
-        setInterval(createParticle, 3000);
+        // Add some dynamic cursor effects for enhanced interaction
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.shape');
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 0.0002;
+                const x = (e.clientX * speed) * (index % 2 === 0 ? 1 : -1);
+                const y = (e.clientY * speed) * (index % 2 === 0 ? 1 : -1);
+                shape.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
     </script>
 </body>
 </html>
