@@ -546,6 +546,63 @@
                 padding: 6rem 1rem 4rem;
             }
         }
+
+        /* Dropdown styles */
+        .dropdown { position: relative; }
+        .dropdown-toggle:after { content: ' ▼'; font-size: 0.7em; }
+        .dropdown-menu {
+          display: none;
+          position: absolute;
+          left: 0;
+          top: 100%;
+          background: #222;
+          border-radius: 0.5rem;
+          min-width: 220px;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+          z-index: 1001;
+          padding: 0.5rem 0;
+        }
+        .dropdown:hover .dropdown-menu, .dropdown:focus-within .dropdown-menu {
+          display: block;
+        }
+        .dropdown-menu li { padding: 0; }
+        .dropdown-menu span.disabled {
+          display: block;
+          color: #a1a1a1;
+          padding: 0.75rem 1.5rem;
+          cursor: not-allowed;
+          opacity: 0.6;
+        }
+        .join-link {
+          opacity: 0.5;
+          font-style: italic;
+          font-weight: 500;
+          pointer-events: auto;
+          transition: opacity 0.2s;
+        }
+        .join-link:hover {
+          opacity: 1;
+          text-decoration: underline;
+        }
+        .nav-socials, .footer-socials {
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+        }
+        .nav-socials {
+          margin-left: 2rem;
+        }
+        .social-icon svg { display: block; }
+        .footer-links {
+          margin-bottom: 1rem;
+        }
+        .footer-link {
+          color: #a1a1a1;
+          margin-right: 1.5rem;
+          text-decoration: underline;
+          font-size: 1rem;
+        }
+        .footer-link:last-child { margin-right: 0; }
     </style>
 </head>
 <body>
@@ -553,12 +610,62 @@
         <nav>
             <div class="logo">👑 King Interpreting</div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
+                <li class="dropdown">
+                    <a href="#about" class="dropdown-toggle" tabindex="0">About Us</a>
+                    <ul class="dropdown-menu">
+                        <li><span class="disabled">About Us</span></li>
+                        <li><span class="disabled">Our Mission</span></li>
+                        <li><span class="disabled">Our Team</span></li>
+                        <li><span class="disabled">Testimonies</span></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#services" class="dropdown-toggle" tabindex="0">Services</a>
+                    <ul class="dropdown-menu">
+                        <li><span class="disabled">On-Site ASL Interpreting</span></li>
+                        <li><span class="disabled">Video-Remote Interpreting</span></li>
+                        <li><span class="disabled">Foreign Spoken Language Interpreting</span></li>
+                        <li><span class="disabled">C-Print Interpreting</span></li>
+                        <li><span class="disabled">CART Services</span></li>
+                        <li><span class="disabled">Closed Captioning Services</span></li>
+                        <li><span class="disabled">Strategic Agency Alliances</span></li>
+                        <li><span class="disabled">ADA Consulting Services</span></li>
+                        <li><span class="disabled">VRS Referral</span></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#contact" class="dropdown-toggle" tabindex="0">Contact Us</a>
+                    <ul class="dropdown-menu">
+                        <li><span class="disabled">Contact Us</span></li>
+                        <li><span class="disabled">Request An Interpreter</span></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#classes" class="dropdown-toggle" tabindex="0">Classes + Events</a>
+                    <ul class="dropdown-menu">
+                        <li><span class="disabled">Classes + Events</span></li>
+                        <li><span class="disabled">ASL Online Resources</span></li>
+                        <li><span class="disabled">Events</span></li>
+                    </ul>
+                </li>
                 <li><a href="#testimonials">Reviews</a></li>
                 <li><a href="#contact" class="cta-nav">Get Started</a></li>
+                <li><a href="#join" class="join-link">Join Us</a></li>
             </ul>
+            <div class="nav-socials">
+                <a href="#" aria-label="Instagram" class="social-icon"><!-- Instagram SVG -->
+                    <svg width="24" height="24" fill="currentColor"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/><rect x="7" y="7" width="10" height="10" rx="5" fill="none" stroke="white" stroke-width="2"/><circle cx="16.5" cy="7.5" r="1.5" fill="white"/></svg>
+                </a>
+                <a href="#" aria-label="Twitter" class="social-icon"><!-- Twitter SVG -->
+                    <svg width="24" height="24" fill="currentColor"><path d="M22 5.92a8.38 8.38 0 0 1-2.36.65A4.13 4.13 0 0 0 21.4 4.1a8.19 8.19 0 0 1-2.6 1A4.1 4.1 0 0 0 12 8.09c0 .32.04.64.1.94A11.65 11.65 0 0 1 3 4.89a4.07 4.07 0 0 0-.55 2.06c0 1.42.72 2.68 1.82 3.42a4.07 4.07 0 0 1-1.86-.52v.05c0 1.98 1.41 3.63 3.28 4a4.1 4.1 0 0 1-1.85.07 4.11 4.11 0 0 0 3.83 2.85A8.23 8.23 0 0 1 2 19.54a11.62 11.62 0 0 0 6.29 1.84c7.55 0 11.68-6.26 11.68-11.68 0-.18-.01-.36-.02-.54A8.18 8.18 0 0 0 22 5.92z" fill="white"/></svg>
+                </a>
+                <a href="#" aria-label="LinkedIn" class="social-icon"><!-- LinkedIn SVG -->
+                    <svg width="24" height="24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="2"/><rect x="6" y="10" width="2" height="6" fill="white"/><rect x="10" y="10" width="2" height="6" fill="white"/><rect x="6" y="6" width="2" height="2" fill="white"/><rect x="10" y="6" width="2" height="2" fill="white"/></svg>
+                </a>
+                <a href="#" aria-label="Facebook" class="social-icon"><!-- Facebook SVG -->
+                    <svg width="24" height="24" fill="currentColor"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/><path d="M15 8h-2a1 1 0 0 0-1 1v2h3l-.5 3h-2.5v6h-3v-6H7v-3h2V9a3 3 0 0 1 3-3h3v3z" fill="white"/></svg>
+                </a>
+            </div>
         </nav>
     </header>
 
@@ -756,6 +863,16 @@
 
     <footer>
         <div class="container">
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Law</a>
+                <a href="#" class="footer-link">ADA Law</a>
+            </div>
+            <div class="footer-socials">
+                <a href="#" aria-label="Instagram" class="social-icon"><svg width="24" height="24" fill="currentColor"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/><rect x="7" y="7" width="10" height="10" rx="5" fill="none" stroke="white" stroke-width="2"/><circle cx="16.5" cy="7.5" r="1.5" fill="white"/></svg></a>
+                <a href="#" aria-label="Twitter" class="social-icon"><svg width="24" height="24" fill="currentColor"><path d="M22 5.92a8.38 8.38 0 0 1-2.36.65A4.13 4.13 0 0 0 21.4 4.1a8.19 8.19 0 0 1-2.6 1A4.1 4.1 0 0 0 12 8.09c0 .32.04.64.1.94A11.65 11.65 0 0 1 3 4.89a4.07 4.07 0 0 0-.55 2.06c0 1.42.72 2.68 1.82 3.42a4.07 4.07 0 0 1-1.86-.52v.05c0 1.98 1.41 3.63 3.28 4a4.1 4.1 0 0 1-1.85.07 4.11 4.11 0 0 0 3.83 2.85A8.23 8.23 0 0 1 2 19.54a11.62 11.62 0 0 0 6.29 1.84c7.55 0 11.68-6.26 11.68-11.68 0-.18-.01-.36-.02-.54A8.18 8.18 0 0 0 22 5.92z" fill="white"/></svg></a>
+                <a href="#" aria-label="LinkedIn" class="social-icon"><svg width="24" height="24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="2"/><rect x="6" y="10" width="2" height="6" fill="white"/><rect x="10" y="10" width="2" height="6" fill="white"/><rect x="6" y="6" width="2" height="2" fill="white"/><rect x="10" y="6" width="2" height="2" fill="white"/></svg></a>
+                <a href="#" aria-label="Facebook" class="social-icon"><svg width="24" height="24" fill="currentColor"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/><path d="M15 8h-2a1 1 0 0 0-1 1v2h3l-.5 3h-2.5v6h-3v-6H7v-3h2V9a3 3 0 0 1 3-3h3v3z" fill="white"/></svg></a>
+            </div>
             <p>© 2025 King Interpreting Services, LLC · Orlando, FL · Made with ❤️ for seamless communication</p>
         </div>
     </footer>
